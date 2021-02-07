@@ -1,0 +1,263 @@
+<html>
+<head><title> ProtectKidz  </title></head>
+
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+
+<!--
+<script src="www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+-->
+<body>
+  
+     <nav class="navbar-inverse" style="position:sticky;top:0;z-index:99999" id="NAVBAR">
+        
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>     
+            <span class="icon-bar"></span>    
+            <span class="icon-bar"></span>                      
+          </button>
+          
+        </div>
+        
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a class="NAVBAR" href="#">ProtectKidz</a></li>
+            <li><a class="NAVBAR" href="#Home">Home</a></li>
+            <li><a class="NAVBAR" href="#PANICMODE">Panic Mode</a></li>
+            <li><a class="NAVBAR" href="#Profile">Profile</a></li>
+            <li><a class="NAVBAR" href="#Alerts">Alerts</a></li>
+          <li><a class="NAVBAR" href="#Settings">Settings</a></li>
+                      </ul>
+       
+    </nav>
+
+<section id="Home">
+<h1>HOME</h1>
+<main class="container"></main>
+<div id="map" class="map"></div>
+</main>
+<script src="script.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=init"  type="text/javascript"></script>
+
+<input type="button" id="Calc_Dist" value="Calculate Distance" onclick="getdistance()">
+<input type="button" id="UPD_Kid_Location" value="Update Kid's Location" onclick="LookupCoordinates()">
+    </section>
+
+
+
+    <section id="PANICMODE">
+    
+      <h1>Panic Mode</h1>
+      <div class="SliderSwitch">
+        <label id = "MedicalEmergency" for="panic1">Medical Emergency
+        <input id="panic1" value="panic1" checked=true type="checkbox" />
+        <div class="SliderSwitch_container">
+          <div class="SliderSwitch_toggle">
+          </div>
+        </div>
+        </label>
+      
+        <br>
+        <br>
+        <label id = "LostMode" for="panic2">Lost Mode 
+          <input id="panic2" value="panic2"  checked=true type="checkbox" />
+          <div class="SliderSwitch_container">
+            <div class="SliderSwitch_toggle">
+            </div>
+          </div>
+          </label>
+      
+      <br>
+      <br>
+      <label id = "Bullying" for="panic3">Bullying / Physical Attack
+        <input id="panic3" value="panic3"  checked=true type="checkbox" />
+        <div class="SliderSwitch_container">
+          <div class="SliderSwitch_toggle">
+          </div>
+        </div>
+        </label>
+      
+        <br>
+      <br>
+      <label id = "locked" for="panic4">Locked out
+        <input id="panic4" value="panic4"  checked=true type="checkbox" />
+        <div class="SliderSwitch_container">
+          <div class="SliderSwitch_toggle">
+          </div>
+               </div>
+        </label>
+    <br>
+
+      </section>
+      <br>
+      <br>
+      <br>
+      <br>
+      <input type="button" id="PanicUpdate" value="Panic Mode" onclick="PanicUpdate()"> 
+      <input type="button" id="SafeUpdate" value="Safe" onclick="SafeUpdate()">
+
+<section id="Profile">
+<h1>Profile</h1>
+<span id="PROFILE_DETAILS">
+  <div class="row">
+<div class="column" id="PARENT_PROFILE">
+<h3> Parent Profile </h3>
+<p>Parent Name  <input type="text" id="PName" class="PProfile"></p><br>
+  <p>Parent Phone Number  <input type="text" id="PPhone" class="PProfile"></p><br>
+    <p>Parent Address <input type="text" id="PAddress" class="PProfile"></p><br>
+
+
+  <br>
+  <input type="button" id="ProfileUpdate" value="Update Profile" onclick="ProfileUpdate()">
+  <br>
+  <br>
+</div>
+
+
+<div class="column" id="KID_PROFILE">
+  <h3> Kid's Profile </h3>
+<p>Kid's Name <input type="text" id="KName" ></p><br>
+<p>Kid's Phone Number <input type="text" id="KPhone" ></p><br>
+<p>Kid's School Address <input type="text" id="KAddress" ></p><br>
+
+
+  <br>
+  
+</div>
+<br>
+<br>
+
+</div>
+</span>
+</section>
+
+   
+  
+<section id="Alerts">
+<h1>Alerts</h1>
+
+<div class="SliderSwitch">
+  <label id = "drown" for="switch1">Alert when Kid approaches drowning area (lake, pool etc.)
+  <input id="switch1" value="switch1" type="checkbox" />
+  <div class="SliderSwitch_container">
+    <div class="SliderSwitch_toggle">
+    </div>
+  </div>
+  </label>
+
+  <br>
+  <br>
+  <label id = "weather" for="switch2">Alert when Kid is at risk due to natural disaster (flood, tornado etc.)
+    <input id="switch2" value="switch2" type="checkbox" />
+    <div class="SliderSwitch_container">
+      <div class="SliderSwitch_toggle">
+      </div>
+    </div>
+    </label>
+
+<br>
+<br>
+<label id = "accidents" for="switch3">Alert when accidents or emergency happen near Kid's location
+  <input id="switch3" value="switch3" type="checkbox" />
+  <div class="SliderSwitch_container">
+    <div class="SliderSwitch_toggle">
+    </div>
+  </div>
+  </label>
+
+  <br>
+<br>
+<label id = "fast" for="switch4">Alert when Kid drives or moves at a faster speed
+  <input id="switch4" value="switch4" type="checkbox" />
+  <div class="SliderSwitch_container">
+    <div class="SliderSwitch_toggle">
+    </div>
+  </div>
+  </label>
+
+  <br>
+<br>
+<label id = "boundary" for="switch5">Alert when Kid  crosses a boundary (geofence)
+  <input id="switch5" value="switch5" type="checkbox" />
+  <div class="SliderSwitch_container">
+    <div class="SliderSwitch_toggle">
+    </div>
+  </div>
+  </label>
+
+  <br>
+<br>
+<label id = "webapp" for="switch6">Alert when Kid access to inappropiate apps or websites
+  <input id="switch6" value="switch6" type="checkbox" />
+  <div class="SliderSwitch_container">
+    <div class="SliderSwitch_toggle">
+    </div>
+  </div>
+  </label>
+
+</div>
+
+<br>
+<input type="button" id="AlertsUpdate" value="Update Alerts" onclick="AlertsUpdate()">
+<br>
+<br>
+
+</section>
+
+<section id="Settings">
+  <h1>Settings</h1>
+  <div class="column" id="POINT_OF_INTEREST">
+    <h3> Approved Locations</h3>
+    <br>
+    <p>Location 1 <input type="text" id="GL1"></p><br>
+    <p>Location 2 <input type="text" id="GL2"></p><br>
+    <p>Location 3 <input type="text" id="GL3"></p><br>
+    <p>Location 4 <input type="text" id="GL4"></p><br>
+    </div>
+
+    <div class="column" id="POINT_OF_DISLIKES">
+      <h3> Unapproved Locations </h3> <br>
+      <p>Location 1 <input type="text" id="BL1"></p><br>
+      <p>Location 2 <input type="text" id="BL2"></p><br>
+      <p>Location 3 <input type="text" id="BL3"></p><br>
+      <p>Location 4 <input type="text" id="BL4"></p><br>
+      </div>
+
+      <div class="column" id="MISC">
+        <h3> Miscellaneous Settings </h3> <br>
+        <p>Distance in kilometers or miles <input type="text" placeholder="kms or miles" id="MISC1"></p><br>
+        <p>Geofence boundary distance from home <input type="text" id="MISC2"></p><br>
+        <p>Geofence boundary distance from school <input type="text" id="MISC3"></p><br>
+        <p>Frequency to update the app in minutes <input type="text" placeholder="30" id="MISC4"></p><br>
+        </div>
+  
+        
+
+      <br>
+      <input type="button" id="SettingsUpdate" value="Update Settings" onclick="SettingsUpdate()">
+      <br>
+      <br>
+      
+</section>
+
+  </body>
+
+  
+</html>
